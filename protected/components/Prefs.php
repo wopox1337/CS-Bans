@@ -312,23 +312,13 @@ class Prefs extends CApplicationComponent {
 
 	/**
 	 * Проверяет и выводит версию
+	 	- This functionality is disabled, because the author stopped supporting.
 	 */
 	public static function getVersion() {
-		$current = Yii::app()->params['Version'];
-		if( ($last = Yii::app()->cache->get('getVersion')) === false ) {
-			$last = @file_get_contents('http://craft-soft.ru/goods/version.html?id=csbans');
-		}
-		if(!$last) {
-			return "{$current} <span class='text-warning'>(не удалось проверить версию)</span>";
-		}
-		Yii::app()->cache->set('getVersion', $last, 21600);
-		if(version_compare($current, $last, '<')) {
-			return "{$current} <span class='text-error'>(доступна новая версия)</span>";
-		}
-		return "{$current} <span class='text-success'>(вы используете последнюю версию)</span>";
+		return "{$current} <span class='text-success'>(Проверка на версию - отключена)</span>";
 	}
-    
-    public static function getRealIp() {
+
+	public static function getRealIp() {
 		if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
 			$ip = $_SERVER['HTTP_CLIENT_IP'];
 		} elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
