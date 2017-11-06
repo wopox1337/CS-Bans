@@ -123,7 +123,7 @@ return array(
 			'emulatePrepare' => true,
 			'username' => $config->db_user,
 			'password' => $config->db_pass,
-			'charset' => 'utf8',
+			'charset' => 'latin1',
 			'tablePrefix'=>$config->db_prefix.'_',
 			'autoConnect' => FALSE,
 			'schemaCachingDuration' => 1000,
