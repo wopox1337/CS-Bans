@@ -152,7 +152,15 @@ class Serverinfo extends CActiveRecord
 			$info['os'] = $s['os'] == 'l' ? 'Linux' : 'Windows';
 			$info['secure'] = $s['secure'] == 0 ? FALSE : TRUE;
 			$info['playersinfo'] = isset($s['players']) && is_array($s['players']) ? $s['players'] : array();
-			$info['timeleft'] = isset($s['mp_timeleft']) ? $s['mp_timeleft'] : isset($s['amx_timeleft'])?$s['amx_timeleft']:false;
+
+			// Add support ReHLDS engine. Thanks to PRoSToTeM@ to help this.
+			if(isset($s["mp_timeleft"]) && $s["mp_timeleft"] != "0")
+				$info["timeleft"] = $s["mp_timeleft"];
+			else if (isset($s["amx_timeleft"]))
+				$info["timeleft"] = $s["amx_timeleft"];
+			else
+				$info["timeleft"] = "0";  
+
 			$info['nextmap'] = isset($s['amx_nextmap'])?$s['amx_nextmap']:FALSE;
 			$info['contact'] = isset($s['sv_contact'])?$s['sv_contact']:FALSE;
 			$game = $this->gametype ? $this->gametype : $info['game'];
